@@ -1,0 +1,123 @@
+body{
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #0d0d0d;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#intro-screen, #game-screen{
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+#intro-screen h1{
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #00ffcc;
+}
+
+#intro-screen p{
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+#start-btn{
+    background: #00ffcc;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#start-btn:hover{
+    background: #00ffcc;
+}
+
+#chat-container{
+    width: 100%;
+    max-width: 600px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-sizing: 0 0 10px rgba(0, 255, 204, 0.6);
+}
+
+#chat-log{
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#chat-log .bot, #chat-log .user{
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+} 
+#chat-log .bot{
+    background: #4a4a4a;
+    color: #000;
+    align-self: flex-start;
+}
+
+#chat-log .user{
+    background: linear-gradient(to bottom, rgba(175, 91, 39, 0.971), #a42828);
+    color: white;
+    align-self: flex-end;
+}
+
+#input-container{
+    display: flex;
+    padding: 10px;
+    background: #1a1a1a;
+}
+
+#user-input{
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #333;
+    background: #000;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#submit-btn{
+    background: #00ffcc;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#start-btn:hover{
+    background: #00ffcc;
+}
+#quit-btn {
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#quit-btn:hover {
+    background: #ff6666;
+}
