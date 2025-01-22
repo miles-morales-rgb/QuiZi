@@ -80,18 +80,25 @@ body {
     align-self: flex-end;
 }
 
-#options-container button {
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.option-button {
     background: #333;
     border: none;
     color: white;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    text-align: center;
     font-size: 14px;
+    text-align: center;
 }
 
-#options-container button:hover {
+.option-button:hover {
     background: #444;
 }
 
