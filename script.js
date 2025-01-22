@@ -41,9 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
             addMessage(`You: ${userName}`, 'user');
             addMessage(`Quizi: Nice to meet you, ${userName}! Let's start the quiz.`, 'bot');
             await askQuestion();
-        } else {
-            addMessage(`You: ${userAnswer}`, 'user');
-            checkAnswer(userAnswer);
         }
     });
 
@@ -56,22 +53,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentQuestion = {
                     question: question.question,
                     correctAnswer: question.correct_answer,
-                    incorrectAnswers: question.incorrect_answers,
+                    allAnswers: shuffle([...question.incorrect_answers, question.correct_answer]),
                 };
 
-                addMessage(`Quizi: ${currentQuestion.question}`, 'bot');
+                const questionMessage = addMessage(`Quizi: ${currentQuestion.question}`, 'bot');
+                displayOptions(questionMessage, currentQuestion.allAnswers);
             } else {
                 addMessage("Quizi: I couldn't fetch a question. Try again later.", 'bot');
             }
         } catch (error) {
             console.error('Error fetching question:', error);
-            addMessage('Quizi: Sorry, something went wrong. Please connect to internet.', 'bot');
+            addMessage('Quizi: Sorry, something went wrong. Please connect to the internet.', 'bot');
         }
     }
 
-    function checkAnswer(userAnswer) {
+    function displayOptions(parentMessage, options) {
+        const optionsContainer = document.createElement('div');
+        optionsContainer.classList.add('options-container');
+
+        options.forEach(option => {
+            const optionButton = document.createElement('button');
+            optionButton.textContent = option;
+            optionButton.classList.add('option-button');
+            optionButton.addEventListener('click', () => checkAnswer(option));
+            optionsContainer.appendChild(optionButton);
+        });
+
+        parentMessage.appendChild(optionsContainer);
+    }
+
+    function checkAnswer(selectedAnswer) {
         if (currentQuestion) {
-            if (userAnswer.toLowerCase() === currentQuestion.correctAnswer.toLowerCase()) {
+            if (selectedAnswer === currentQuestion.correctAnswer) {
                 addMessage(`Quizi: Correct! Well done, ${userName}.`, 'bot');
             } else {
                 addMessage(`Quizi: Wrong answer! The correct answer was "${currentQuestion.correctAnswer}".`, 'bot');
@@ -86,5 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
         message.innerHTML = content;
         chatLog.appendChild(message);
         chatLog.scrollTop = chatLog.scrollHeight;
+        return message; // Return the message container for adding options under it
+    }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
 });
